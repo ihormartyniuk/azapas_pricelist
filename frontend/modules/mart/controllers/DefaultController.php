@@ -23,8 +23,9 @@ class DefaultController extends Controller
     public function actionUploadfile(){
         $model = new LoadFile();
         if($model->load(Yii::$app->request->post())){
-            $model->getFile();
-            return $this->render('index');
+            if($model->getFile()){
+                return $this->render('index');
+            }
         }
         return $this->render('upload-form', [
             'model' => $model,
